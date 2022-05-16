@@ -1,6 +1,8 @@
 {
+    "name": "dawan/sf22w20",
+    "description": "A training workshop for Symfony",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
