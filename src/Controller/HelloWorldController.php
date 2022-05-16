@@ -21,6 +21,7 @@ class HelloWorldController extends AbstractController
 
         return $this->render('hello_world/index.html.twig', [
             'controller_name' => 'HelloWorldController',
+            'exemple_datetime' => new \DateTime(),
         ]);
     }
 
