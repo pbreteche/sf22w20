@@ -45,6 +45,12 @@ class HelloWorldController extends AbstractController
         dump($request->getPreferredLanguage(['en', 'fr', 'es']));
         dump($int_id);
 
-        return new Response('<p>le param est '.$int_id.'</p></body>');
+        $response = new Response('<body><p>le param est '.$int_id.'</p></body>', Response::HTTP_ACCEPTED, [
+            'Content-Type' => 'text/html',
+        ]);
+
+        $response->headers->set('x-custom-header', 'données personnalisées');
+
+        return $response;
     }
 }
