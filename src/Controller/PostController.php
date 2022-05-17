@@ -45,4 +45,24 @@ class PostController extends AbstractController
             'post' => $post,
         ]);
     }
+
+    #[Route('/post/new', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/post/new", methods={"GET", "POST"})
+     */
+    public function create(): Response
+    {
+        $post = new Post();
+        $post->setCreatedAt(new \DateTimeImmutable());
+        $form = $this->createFormBuilder($post)
+            ->add('title')
+            ->add('body')
+            ->add('promoted')
+            ->getForm()
+        ;
+
+        return $this->renderForm('post/create.html.twig', [
+            'create_form' => $form,
+        ]);
+    }
 }
