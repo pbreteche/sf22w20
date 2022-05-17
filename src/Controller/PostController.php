@@ -20,4 +20,21 @@ class PostController extends AbstractController
             'posts' => $posts,
         ]);
     }
+
+    #[Route('/post/{id}', requirements: ['id' => '\d+'])]
+    /**
+     * @Route("/post/{id}",requirements={"id": "\d+"})
+     */
+    public function show(int $id, PostRepository $postRepository): Response
+    {
+        $post = $postRepository->find($id);
+
+        if (!$post) {
+            throw $this->createNotFoundException('No post with id: '.$id);
+        }
+
+        return $this->render('post/show.html.twig', [
+            'post' => $post,
+        ]);
+    }
 }
