@@ -11,7 +11,9 @@
 
     <ul>
         {% for post in posts %}
-        <li>{{ post.title }}</li>
+        <li>{{ post.title }}
+            <a href="{{ path('app_post_show', {id: post.id}) }}">Voir</a>
+        </li>
         {% endfor %}
     </ul>
 

@@ -3,6 +3,7 @@
 {% block heading %}{{ post.title }}{% endblock %}
 
 {% block body %}
+<a href="{{ path('app_post_index') }}">Retour à la liste</a>
 <div>Publié le {{ post.createdAt|date('d/m/Y') }}</div>
 <div>
     {{ post.body }}
