@@ -57,6 +57,27 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @return Post[]
+     */
+    public function findByMonthDQL(\DateTimeImmutable $month): array
+    {
+        return $this
+            ->getEntityManager()
+            ->createQuery(
+                'SELECT post FROM '.Post::class.' AS post '.
+                'WHERE post.createdAt >= :from '.
+                'AND post.createdAt < :to '.
+                'ORDER BY post.createdAt DESC'
+            )
+            ->setParameters([
+                'from' => $month->modify('first day of this month midnight'),
+                'to' => $month->modify('first day of next month midnight'),
+            ])
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */
