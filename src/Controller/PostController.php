@@ -58,6 +58,7 @@ class PostController extends AbstractController
             ->add('title')
             ->add('body')
             ->add('promoted')
+            // ->add('validate', SubmitType::class) si le bouton doit faire partie du modèle
             ->getForm()
         ;
 
