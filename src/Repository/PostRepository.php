@@ -39,6 +39,24 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Post[]
+     */
+    public function findByMonth(\DateTimeImmutable $month): array
+    {
+        return $this->createQueryBuilder('post') // clause SELECT et FROM
+            ->andWhere('post.createdAt >= :from') // clause WHERE
+            ->andWhere('post.createdAt < :to')
+            ->orderBy('post.createdAt', 'DESC')
+            ->getQuery()
+            ->setParameters([
+                'from' => $month->modify('first day of this month midnight'),
+                'to' => $month->modify('first day of next month midnight'),
+            ])
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */

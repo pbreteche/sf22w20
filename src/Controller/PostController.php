@@ -22,6 +22,19 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[Route('/post/{month}', requirements: ['month' => '\d{4}-((0[1-9])|(1[0-2]))'])]
+    /**
+     * @Route("/post/{month}", requirements={"month": "\d{4}-((0[1-9])|(1[0-2]))"})
+     */
+    public function indexByMonth(\DateTimeImmutable $month, PostRepository $postRepository): Response
+    {
+        $posts = $postRepository->findByMonth($month);
+
+        return $this->render('post/index.html.twig', [
+            'posts' => $posts,
+        ]);
+    }
+
     #[Route('/post/{id}', requirements: ['id' => '\d+'])]
     /**
      * @Route("/post/{id}",requirements={"id": "\d+"})
