@@ -39,6 +39,19 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByCategoryName(string $name)
+    {
+        return $this->createQueryBuilder('post')
+            // Fetch join: permet de charger la catégorie si la relation est configurée en LAZY
+            ->addSelect('category')
+            ->innerJoin('post.categorizedBy', 'category')
+            ->andWhere('category.name = :name')
+            ->getQuery()
+            ->setParameter('name', $name)
+            ->getResult()
+        ;
+    }
+
     /**
      * @return Post[]
      */

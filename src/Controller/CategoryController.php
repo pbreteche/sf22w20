@@ -19,7 +19,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}')]
+    #[Route('/{id}', requirements: ['id' => '\d+'])]
     public function postIndex(Category $category, PostRepository $postRepository): Response
     {
         $posts = $postRepository->findBy(['categorizedBy' => $category], ['createdAt' => 'DESC']);

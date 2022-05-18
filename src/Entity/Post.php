@@ -29,7 +29,7 @@ class Post
     #[ORM\Column(type: 'boolean')]
     private $promoted = false;
 
-    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\ManyToOne(targetEntity: Category::class, fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
     private $categorizedBy;
