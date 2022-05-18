@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -50,7 +51,7 @@ class PostController extends AbstractController
     /**
      * @Route("/post/new", methods={"GET", "POST"})
      */
-    public function create(): Response
+    public function create(Request $request, PostRepository $postRepository): Response
     {
         $post = new Post();
         $post->setCreatedAt(new \DateTimeImmutable());
@@ -61,6 +62,15 @@ class PostController extends AbstractController
             // ->add('validate', SubmitType::class) si le bouton doit faire partie du modèle
             ->getForm()
         ;
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $postRepository->add($post, true);
+            $this->addFlash('success', 'La publication a bien été enregistrée.');
+
+            return $this->redirectToRoute('app_post_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
+        }
 
         return $this->renderForm('post/create.html.twig', [
             'create_form' => $form,

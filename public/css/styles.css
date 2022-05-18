@@ -3,3 +3,17 @@
     color: #fed;
     padding: .5em;
 }
+
+.flash {
+    padding: 1em;
+    border: 1px solid black;
+    color: #eee;
+    background: #555;
+    border-radius: .25em;
+}
+
+.flash-success {
+    color: #050;
+    background: #AFA;
+    border-color: #050;
+}

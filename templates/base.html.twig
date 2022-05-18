@@ -18,6 +18,13 @@
     <div class="brand">
         <h1>{% block heading %} Dawan {% endblock %}</h1>
     </div>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
         {% block body %}{% endblock %}
     </body>
 </html>
