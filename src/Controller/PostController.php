@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,12 +57,7 @@ class PostController extends AbstractController
     {
         $post = new Post();
         $post->setCreatedAt(new \DateTimeImmutable());
-        $form = $this->createFormBuilder($post)
-            ->add('title')
-            ->add('body')
-            ->add('promoted')
-            ->getForm()
-        ;
+        $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
 
@@ -80,12 +76,7 @@ class PostController extends AbstractController
     #[Route('/post/{id}/edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function edit(Post $post, Request $request, ManagerRegistry $doctrine): Response
     {
-        $form = $this->createFormBuilder($post)
-            ->add('title')
-            ->add('body')
-            ->add('promoted')
-            ->getForm()
-        ;
+        $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
 
