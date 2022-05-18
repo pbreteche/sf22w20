@@ -56,7 +56,6 @@ class PostController extends AbstractController
     public function create(Request $request, PostRepository $postRepository): Response
     {
         $post = new Post();
-        $post->setCreatedAt(new \DateTimeImmutable());
         $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
