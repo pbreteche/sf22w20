@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Post
 {
     #[ORM\Id]
@@ -33,11 +34,6 @@ class Post
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
     private $categorizedBy;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTimeImmutable();
-    }
 
     public function getId(): ?int
     {
@@ -95,5 +91,14 @@ class Post
         $this->categorizedBy = $categorizedBy;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
     }
 }
