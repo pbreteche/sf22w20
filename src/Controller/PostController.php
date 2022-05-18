@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Repository\PostRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,7 +60,6 @@ class PostController extends AbstractController
             ->add('title')
             ->add('body')
             ->add('promoted')
-            // ->add('validate', SubmitType::class) si le bouton doit faire partie du modèle
             ->getForm()
         ;
 
@@ -74,6 +74,31 @@ class PostController extends AbstractController
 
         return $this->renderForm('post/create.html.twig', [
             'create_form' => $form,
+        ]);
+    }
+
+    #[Route('/post/{id}/edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function edit(Post $post, Request $request, ManagerRegistry $doctrine): Response
+    {
+        $form = $this->createFormBuilder($post)
+            ->add('title')
+            ->add('body')
+            ->add('promoted')
+            ->getForm()
+        ;
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $doctrine->getManager();
+            $manager->flush();
+            $this->addFlash('success', 'La publication a bien été modifiée.');
+
+            return $this->redirectToRoute('app_post_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('post/edit.html.twig', [
+            'edit_form' => $form,
         ]);
     }
 }
