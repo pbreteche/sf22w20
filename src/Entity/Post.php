@@ -29,6 +29,11 @@ class Post
     #[ORM\Column(type: 'boolean')]
     private $promoted = false;
 
+    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
+    private $categorizedBy;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -76,6 +81,18 @@ class Post
     public function setPromoted(bool $promoted): self
     {
         $this->promoted = $promoted;
+
+        return $this;
+    }
+
+    public function getCategorizedBy(): ?Category
+    {
+        return $this->categorizedBy;
+    }
+
+    public function setCategorizedBy(?Category $categorizedBy): self
+    {
+        $this->categorizedBy = $categorizedBy;
 
         return $this;
     }
