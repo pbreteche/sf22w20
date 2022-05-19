@@ -20,4 +20,10 @@ class LoginController extends AbstractController
             'error' => $error,
         ]);
     }
+
+    #[Route('/logout')]
+    public function logout()
+    {
+        throw new \Exception('Cette méthode ne doit jamais être appelée');
+    }
 }

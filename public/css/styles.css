@@ -17,3 +17,9 @@
     background: #AFA;
     border-color: #050;
 }
+
+.flash-error {
+    color: #500;
+    background: #FAA;
+    border-color: #500;
+}
