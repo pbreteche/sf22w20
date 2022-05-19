@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Reporter\PostReporter;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,10 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     #[Route('/')]
-    public function index(CategoryRepository $repository): Response
+    public function index(CategoryRepository $repository, PostReporter $postReporter): Response
     {
         return $this->render('category/index.html.twig', [
             'categories' => $repository->findAll(),
+            'report' => $postReporter->report(),
         ]);
     }
 

@@ -7,6 +7,7 @@ use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -83,7 +84,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/post/{id}/edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    #[IsGranted('IS_AUTHOR', subject: 'post')]
+    #[Security('is_granted("IS_AUTHOR", post) or is_granted("ROLE_ADMIN")')]
     public function edit(Post $post, Request $request, ManagerRegistry $doctrine): Response
     {
         $form = $this->createForm(PostType::class, $post);
