@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if error %}
+        <div class="flash flash-error">Email ou mot de passe non valide</div>
+    {% endif %}
+
+    <form action="{{ path('app_login_login') }}" method="post">
+        <div>
+            <label for="login-username">Email</label>
+            <input type="text" id="login-username" name="_username" value="{{ last_username }}">
+        </div>
+        <div>
+            <label for="login-password">Mot de passe</label>
+            <input type="password" id="login-password" name="_password">
+        </div>
+
+        <button>Se connecter</button>
+    </form>
+
+{% endblock %}
