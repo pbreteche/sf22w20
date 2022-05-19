@@ -11,7 +11,6 @@
 
     <ul>
         {% for post in posts %}
-            {% dump post %}
         <li>{{ post.title }} - {{ post.categorizedBy.name }}
             <a href="{{ path('app_post_show', {id: post.id}) }}">Voir</a>
             <a href="{{ path('app_post_edit', {id: post.id}) }}">Modifier</a>

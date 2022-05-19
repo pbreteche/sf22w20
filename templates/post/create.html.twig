@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if is_granted('IS_AUTHENTICATED') %}
+    <p>Seulement pour les utilisateurs authentifiés</p>
+    {% endif %}
+
     {{ include('post/_form.html.twig', {
         form: create_form,
         button_text: 'Publier'

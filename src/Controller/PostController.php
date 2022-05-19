@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,12 +51,21 @@ class PostController extends AbstractController
     }
 
     #[Route('/post/new', methods: ['GET', 'POST'])]
+    #[IsGranted('IS_AUTHENTICATED')]
     /**
      * @Route("/post/new", methods={"GET", "POST"})
+     * @IsGranted("IS_AUTHENTICATED")
      */
     public function create(Request $request, PostRepository $postRepository): Response
     {
+        if (!$this->isGranted('IS_AUTHENTICATED')) {
+            throw $this->createAccessDeniedException('Vous devez être authentifié');
+        }
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+
         $post = new Post();
+        $post->setAuthor($this->getUser());
         $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
