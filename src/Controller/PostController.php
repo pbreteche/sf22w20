@@ -83,6 +83,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/post/{id}/edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[IsGranted('IS_AUTHOR', subject: 'post')]
     public function edit(Post $post, Request $request, ManagerRegistry $doctrine): Response
     {
         $form = $this->createForm(PostType::class, $post);
