@@ -7,7 +7,7 @@ global:
 
 post:
   field:
-    created_at: Publié le
+    created_at: Publié le {created_at, date, full}
     categorized_by: Catégorie
   index:
     title: >-

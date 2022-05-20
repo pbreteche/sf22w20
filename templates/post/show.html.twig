@@ -4,7 +4,7 @@
 
 {% block body %}
 <a href="{{ path('app_post_index') }}">Retour à la liste</a>
-<div>{{ 'post.field.created_at'|trans }} {{ post.createdAt|date('d/m/Y') }}</div>
+<div>{{ 'post.field.created_at'|trans({created_at: post.createdAt}) }}</div>
 <div>{{ 'post.field.categorized_by'|trans }} "{{ post.categorizedBy.name }}"</div>
 <div>
     {{ post.body }}
