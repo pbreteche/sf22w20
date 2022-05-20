@@ -5,6 +5,9 @@
 {% block body %}
 <a href="{{ path('app_post_index') }}">Retour à la liste</a>
 <div>{{ 'post.field.created_at'|trans({created_at: post.createdAt}) }}</div>
+<div>Date affichée directement avec intl-extra : {{ post.createdAt|format_date('full') }}</div>
+<div>Nombre affiché directement avec intl-extra : {{ 1234.4567|format_number({fraction_digit: 2}) }}</div>
+<div>Somme affichée directement avec intl-extra : {{ 1234.4567|format_currency('INR', {fraction_digit: 2}) }}</div>
 <div>{{ 'post.field.categorized_by'|trans }} "{{ post.categorizedBy.name }}"</div>
 <div>
     {{ post.body }}
