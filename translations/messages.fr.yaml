@@ -1,9 +1,0 @@
-Welcome to my app: Bienvenue sur mon application
-app.welcome.message: Bienvenue sur mon application
-
-post:
-  field:
-    created_at: Publié le
-    categorized_by: Catégorie
-  index:
-    title: Retrouvez ici nos %count% publications.

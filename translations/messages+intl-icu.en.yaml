@@ -1,0 +1,15 @@
+global:
+  action:
+    update: Update
+
+post:
+  field:
+    created_at: Published at
+    categorized_by: Category
+  index:
+    title: >-
+      {count, plural,
+        =0    {No post here.}
+        one   {Find here the single post.}
+        other {Find here our # posts.}
+      }

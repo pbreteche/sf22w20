@@ -7,7 +7,7 @@
 
 {% block body %}
 
-    <p>{{ 'post.index.title'|trans({'%count%': posts|length}) }}</p>
+    <p>{{ 'post.index.title'|trans({count: posts|length}) }}</p>
 
     <ul>
         {% for post in posts %}

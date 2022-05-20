@@ -1,0 +1,18 @@
+Welcome to my app: Bienvenue sur mon application
+app.welcome.message: Bienvenue sur mon application
+
+global:
+  action:
+    update: Mettre à jour
+
+post:
+  field:
+    created_at: Publié le
+    categorized_by: Catégorie
+  index:
+    title: >-
+      {count, plural,
+        =0    {Pas de publications pour le moment.}
+        one   {Retrouver ici notre unique publication.}
+        other {Retrouvez ici nos # publications.}
+      }
