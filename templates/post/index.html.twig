@@ -7,7 +7,7 @@
 
 {% block body %}
 
-    <p>Retrouvez ici nos {{ posts|length }} publications.</p>
+    <p>{{ 'post.index.title'|trans({'%count%': posts|length}) }}</p>
 
     <ul>
         {% for post in posts %}
