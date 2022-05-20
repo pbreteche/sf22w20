@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <p>{{ report }}</p>
 <ul>
 {% for category in categories %}
     <li><a href="{{ path('app_category_postindex', {id: category.id}) }}">{{ category.name }}</a></li>
