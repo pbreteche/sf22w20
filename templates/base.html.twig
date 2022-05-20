@@ -18,6 +18,10 @@
     <div class="brand">
         <h1>{% block heading %} Dawan {% endblock %}</h1>
     </div>
+    <ul>
+        <li><a href="?locale=fr">{{ 'fr'|language_name('fr') }}</a></li>
+        <li><a href="?locale=en">{{ 'en'|language_name('en') }}</a></li>
+    </ul>
     {% for label, messages in app.flashes %}
         {% for message in messages %}
             <div class="flash flash-{{ label }}">
